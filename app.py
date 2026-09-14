@@ -53,11 +53,30 @@ def find_best_python():
     return sys.executable
 
 
-# Self-healing check: If executed via Python 3.14 (blocked by Windows SAC) or directly via python.exe
-is_py314 = sys.version_info >= (3, 14)
-is_direct_python = (__name__ == "__main__") and not any("streamlit" in os.path.basename(arg).lower() for arg in sys.argv)
+def should_auto_launch() -> bool:
+    """Returns True ONLY if app.py was executed directly with `python app.py` outside Streamlit."""
+    # 1. If already launched by a runner or child process, do not re-launch
+    if os.environ.get("STREAMLIT_AUTO_LAUNCHED") == "1":
+        return False
 
-if is_py314 or (is_direct_python and not os.environ.get("STREAMLIT_AUTO_LAUNCHED")):
+    # 2. If executed via streamlit CLI (e.g. `streamlit run app.py`)
+    for arg in sys.argv:
+        if "streamlit" in os.path.basename(arg).lower():
+            return False
+
+    # 3. Check Streamlit runtime context
+    try:
+        from streamlit.runtime.scriptrunner import get_script_run_ctx
+        if get_script_run_ctx() is not None:
+            return False
+    except Exception:
+        pass
+
+    # 4. Only auto-launch if directly executed as main script via python.exe
+    return (__name__ == "__main__")
+
+
+if should_auto_launch():
     target_py = find_best_python()
     print(f"Launching Student Performance Prediction System via: {target_py}")
     env = os.environ.copy()
