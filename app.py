@@ -205,6 +205,22 @@ st.markdown("""
     .priority-low {
         border-left: 5px solid #10b981;
     }
+
+    .report-card-container {
+        background: #ffffff;
+        border: 2px solid #1e3c72;
+        border-radius: 12px;
+        padding: 28px;
+        color: #1e293b;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        margin: 15px 0 25px 0;
+    }
+    .report-header {
+        text-align: center;
+        border-bottom: 2px solid #1e3c72;
+        padding-bottom: 14px;
+        margin-bottom: 20px;
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -470,102 +486,105 @@ def render_report_card(student_rec: dict):
     else:
         letter_grade, gpa = "F (Fail / At-Risk)", 0.0
 
-    st.markdown(f"""
-    <div class="report-card-container">
-        <div class="report-header">
-            <h2 style="color: #1e3c72; margin: 0; font-size: 1.8rem; font-weight: 800;">UNIVERSITY COLLEGE OF COMPUTER APPLICATIONS</h2>
-            <div style="font-size: 1rem; color: #475569; font-weight: 600; margin-top: 4px;">Department of Computer Applications • BCA Degree Programme</div>
-            <div style="font-size: 1.15rem; font-weight: 700; color: #0f172a; margin-top: 8px; text-transform: uppercase; letter-spacing: 1px;">Official Student Academic Standing & Performance Report</div>
-        </div>
-        
-        <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
-            <tr style="background: #f8fafc;">
-                <td style="padding: 8px 12px; border: 1px solid #cbd5e1; font-weight: 600; width: 25%;">Student Roll / ID:</td>
-                <td style="padding: 8px 12px; border: 1px solid #cbd5e1; width: 25%; font-weight: 700; color: #1e3c72;">{student_rec.get('Student_ID')}</td>
-                <td style="padding: 8px 12px; border: 1px solid #cbd5e1; font-weight: 600; width: 25%;">Evaluation Date:</td>
-                <td style="padding: 8px 12px; border: 1px solid #cbd5e1; width: 25%;">{student_rec.get('Evaluation_Date')}</td>
-            </tr>
-            <tr>
-                <td style="padding: 8px 12px; border: 1px solid #cbd5e1; font-weight: 600;">Student Full Name:</td>
-                <td style="padding: 8px 12px; border: 1px solid #cbd5e1; font-weight: 700;">{student_rec.get('Student_Name')}</td>
-                <td style="padding: 8px 12px; border: 1px solid #cbd5e1; font-weight: 600;">Academic Status:</td>
-                <td style="padding: 8px 12px; border: 1px solid #cbd5e1; font-weight: 700; color: {'#b91c1c' if pred_tier=='At-Risk' else '#15803d'};">{student_rec.get('Status')}</td>
-            </tr>
-        </table>
-        
-        <h4 style="color: #1e3c72; margin-top: 16px; margin-bottom: 8px;">1. Continuous Academic Assessment Indicators</h4>
-        <table style="width: 100%; border-collapse: collapse; margin-bottom: 24px;">
-            <tr style="background: #1e3c72; color: white; font-weight: 600;">
-                <th style="padding: 10px; border: 1px solid #cbd5e1; text-align: left;">Assessment Component</th>
-                <th style="padding: 10px; border: 1px solid #cbd5e1; text-align: center;">Recorded Metric</th>
-                <th style="padding: 10px; border: 1px solid #cbd5e1; text-align: center;">Standard Benchmark</th>
-                <th style="padding: 10px; border: 1px solid #cbd5e1; text-align: center;">Status</th>
-            </tr>
-            <tr>
-                <td style="padding: 8px 12px; border: 1px solid #cbd5e1;">Classroom Lecture Attendance</td>
-                <td style="padding: 8px 12px; border: 1px solid #cbd5e1; text-align: center; font-weight: 700;">{att}%</td>
-                <td style="padding: 8px 12px; border: 1px solid #cbd5e1; text-align: center;">75.0% Minimum</td>
-                <td style="padding: 8px 12px; border: 1px solid #cbd5e1; text-align: center; font-weight: 700; color: {'#b91c1c' if att<75 else '#15803d'};">{'Deficit' if att<75 else 'Satisfactory'}</td>
-            </tr>
-            <tr style="background: #f8fafc;">
-                <td style="padding: 8px 12px; border: 1px solid #cbd5e1;">Internal Assessment Examination</td>
-                <td style="padding: 8px 12px; border: 1px solid #cbd5e1; text-align: center; font-weight: 700;">{internal} / 50</td>
-                <td style="padding: 8px 12px; border: 1px solid #cbd5e1; text-align: center;">25.0 / 50 (Pass)</td>
-                <td style="padding: 8px 12px; border: 1px solid #cbd5e1; text-align: center; font-weight: 700; color: {'#b91c1c' if internal<25 else '#15803d'};">{'Below Average' if internal<25 else 'Clear'}</td>
-            </tr>
-            <tr>
-                <td style="padding: 8px 12px; border: 1px solid #cbd5e1;">Previous Semester Baseline Score</td>
-                <td style="padding: 8px 12px; border: 1px solid #cbd5e1; text-align: center; font-weight: 700;">{past_score} / 100</td>
-                <td style="padding: 8px 12px; border: 1px solid #cbd5e1; text-align: center;">50.0 / 100</td>
-                <td style="padding: 8px 12px; border: 1px solid #cbd5e1; text-align: center; font-weight: 700;">Passed</td>
-            </tr>
-            <tr style="background: #f8fafc;">
-                <td style="padding: 8px 12px; border: 1px solid #cbd5e1;">Self-Study Allocation</td>
-                <td style="padding: 8px 12px; border: 1px solid #cbd5e1; text-align: center; font-weight: 700;">{study_hrs} hrs / week</td>
-                <td style="padding: 8px 12px; border: 1px solid #cbd5e1; text-align: center;">14.0 hrs / week</td>
-                <td style="padding: 8px 12px; border: 1px solid #cbd5e1; text-align: center;">{'Adequate' if study_hrs>=12 else 'Needs Increase'}</td>
-            </tr>
-        </table>
-        
-        <h4 style="color: #1e3c72; margin-top: 16px; margin-bottom: 8px;">2. Machine Learning Predictive Examination Outcome</h4>
-        <div style="background: #f1f5f9; border-radius: 8px; padding: 18px; margin-bottom: 24px; display: flex; justify-content: space-around; text-align: center;">
-            <div>
-                <div style="font-size: 0.85rem; color: #64748b; font-weight: 600;">PREDICTED EXAM SCORE</div>
-                <div style="font-size: 2rem; font-weight: 800; color: #1e3c72;">{pred_score:.1f}%</div>
-            </div>
-            <div>
-                <div style="font-size: 0.85rem; color: #64748b; font-weight: 600;">ACADEMIC CLASSIFICATION</div>
-                <div style="font-size: 1.5rem; font-weight: 700; color: {'#b91c1c' if pred_tier=='At-Risk' else '#15803d'};">{pred_tier}</div>
-            </div>
-            <div>
-                <div style="font-size: 0.85rem; color: #64748b; font-weight: 600;">GRADE & GPA SCALE</div>
-                <div style="font-size: 1.4rem; font-weight: 700; color: #334155;">{letter_grade} ({gpa:.1f})</div>
-            </div>
-        </div>
+    report_html = f"""<div class="report-card-container">
+<div class="report-header">
+<h2 style="color: #1e3c72; margin: 0; font-size: 1.8rem; font-weight: 800; text-align: center;">UNIVERSITY COLLEGE OF COMPUTER APPLICATIONS</h2>
+<div style="font-size: 1rem; color: #475569; font-weight: 600; margin-top: 4px; text-align: center;">Department of Computer Applications • BCA Degree Programme</div>
+<div style="font-size: 1.15rem; font-weight: 700; color: #0f172a; margin-top: 8px; text-transform: uppercase; letter-spacing: 1px; text-align: center;">Official Student Academic Standing & Performance Report</div>
+</div>
 
-        <h4 style="color: #1e3c72; margin-top: 16px; margin-bottom: 8px;">3. Faculty Remarks & Prescriptive Action Plan</h4>
-        <div style="background: #f8fafc; border-left: 4px solid #1e3c72; padding: 14px 18px; font-size: 0.95rem; margin-bottom: 30px;">
-            {f"• <strong>URGENT REMEDIATION:</strong> Attendance ({att}%) is critically below the 75% examination eligibility requirement. Mandatory mentor counseling scheduled.<br>" if att < 75 else "• <strong>ATTENDANCE STANDING:</strong> Attendance complies with university examination guidelines.<br>"}
-            {f"• <strong>STUDY TIME ADJUSTMENT:</strong> Recommend increasing self-study by at least 4 hours/week to bolster core fundamentals.<br>" if study_hrs < 12 else "• <strong>STUDY HABITS:</strong> Consistent study schedule observed.<br>"}
-            • <strong>OVERALL PROJECTION:</strong> Student is projected to achieve <strong>{pred_score:.1f}%</strong> ({pred_tier} Category). Maintain focus on laboratory exercises and model test submissions.
-        </div>
-        
-        <div style="display: flex; justify-content: space-between; margin-top: 40px; padding-top: 20px; border-top: 1px dashed #cbd5e1; font-size: 0.9rem;">
-            <div style="text-align: center;">
-                <div style="font-weight: 700;">Prof. Rajesh Gupta</div>
-                <div style="color: #64748b;">Faculty Academic Mentor</div>
-            </div>
-            <div style="text-align: center;">
-                <div style="font-weight: 700;">Dr. M. S. Venkatesh</div>
-                <div style="color: #64748b;">Head of Department (BCA)</div>
-            </div>
-            <div style="text-align: center;">
-                <div style="font-weight: 700;">Registrar (Evaluation)</div>
-                <div style="color: #64748b;">Office of Academic Examination</div>
-            </div>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+<table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+<tr style="background: #f8fafc;">
+<td style="padding: 8px 12px; border: 1px solid #cbd5e1; font-weight: 600; width: 25%;">Student Roll / ID:</td>
+<td style="padding: 8px 12px; border: 1px solid #cbd5e1; width: 25%; font-weight: 700; color: #1e3c72;">{student_rec.get('Student_ID')}</td>
+<td style="padding: 8px 12px; border: 1px solid #cbd5e1; font-weight: 600; width: 25%;">Evaluation Date:</td>
+<td style="padding: 8px 12px; border: 1px solid #cbd5e1; width: 25%;">{student_rec.get('Evaluation_Date')}</td>
+</tr>
+<tr>
+<td style="padding: 8px 12px; border: 1px solid #cbd5e1; font-weight: 600;">Student Full Name:</td>
+<td style="padding: 8px 12px; border: 1px solid #cbd5e1; font-weight: 700;">{student_rec.get('Student_Name')}</td>
+<td style="padding: 8px 12px; border: 1px solid #cbd5e1; font-weight: 600;">Academic Status:</td>
+<td style="padding: 8px 12px; border: 1px solid #cbd5e1; font-weight: 700; color: {'#b91c1c' if pred_tier=='At-Risk' else '#15803d'};">{student_rec.get('Status')}</td>
+</tr>
+</table>
+
+<h4 style="color: #1e3c72; margin-top: 16px; margin-bottom: 8px;">1. Continuous Academic Assessment Indicators</h4>
+<table style="width: 100%; border-collapse: collapse; margin-bottom: 24px;">
+<tr style="background: #1e3c72; color: white; font-weight: 600;">
+<th style="padding: 10px; border: 1px solid #cbd5e1; text-align: left;">Assessment Component</th>
+<th style="padding: 10px; border: 1px solid #cbd5e1; text-align: center;">Recorded Metric</th>
+<th style="padding: 10px; border: 1px solid #cbd5e1; text-align: center;">Standard Benchmark</th>
+<th style="padding: 10px; border: 1px solid #cbd5e1; text-align: center;">Status</th>
+</tr>
+<tr>
+<td style="padding: 8px 12px; border: 1px solid #cbd5e1;">Classroom Lecture Attendance</td>
+<td style="padding: 8px 12px; border: 1px solid #cbd5e1; text-align: center; font-weight: 700;">{att}%</td>
+<td style="padding: 8px 12px; border: 1px solid #cbd5e1; text-align: center;">75.0% Minimum</td>
+<td style="padding: 8px 12px; border: 1px solid #cbd5e1; text-align: center; font-weight: 700; color: {'#b91c1c' if att<75 else '#15803d'};">{'Deficit' if att<75 else 'Satisfactory'}</td>
+</tr>
+<tr style="background: #f8fafc;">
+<td style="padding: 8px 12px; border: 1px solid #cbd5e1;">Internal Assessment Examination</td>
+<td style="padding: 8px 12px; border: 1px solid #cbd5e1; text-align: center; font-weight: 700;">{internal} / 50</td>
+<td style="padding: 8px 12px; border: 1px solid #cbd5e1; text-align: center;">25.0 / 50 (Pass)</td>
+<td style="padding: 8px 12px; border: 1px solid #cbd5e1; text-align: center; font-weight: 700; color: {'#b91c1c' if internal<25 else '#15803d'};">{'Below Average' if internal<25 else 'Clear'}</td>
+</tr>
+<tr>
+<td style="padding: 8px 12px; border: 1px solid #cbd5e1;">Previous Semester Baseline Score</td>
+<td style="padding: 8px 12px; border: 1px solid #cbd5e1; text-align: center; font-weight: 700;">{past_score} / 100</td>
+<td style="padding: 8px 12px; border: 1px solid #cbd5e1; text-align: center;">50.0 / 100</td>
+<td style="padding: 8px 12px; border: 1px solid #cbd5e1; text-align: center; font-weight: 700;">Passed</td>
+</tr>
+<tr style="background: #f8fafc;">
+<td style="padding: 8px 12px; border: 1px solid #cbd5e1;">Self-Study Allocation</td>
+<td style="padding: 8px 12px; border: 1px solid #cbd5e1; text-align: center; font-weight: 700;">{study_hrs} hrs / week</td>
+<td style="padding: 8px 12px; border: 1px solid #cbd5e1; text-align: center;">14.0 hrs / week</td>
+<td style="padding: 8px 12px; border: 1px solid #cbd5e1; text-align: center;">{'Adequate' if study_hrs>=12 else 'Needs Increase'}</td>
+</tr>
+</table>
+
+<h4 style="color: #1e3c72; margin-top: 16px; margin-bottom: 8px;">2. Machine Learning Predictive Examination Outcome</h4>
+<div style="background: #f1f5f9; border-radius: 8px; padding: 18px; margin-bottom: 24px; display: flex; justify-content: space-around; text-align: center;">
+<div>
+<div style="font-size: 0.85rem; color: #64748b; font-weight: 600;">PREDICTED EXAM SCORE</div>
+<div style="font-size: 2rem; font-weight: 800; color: #1e3c72;">{pred_score:.1f}%</div>
+</div>
+<div>
+<div style="font-size: 0.85rem; color: #64748b; font-weight: 600;">ACADEMIC CLASSIFICATION</div>
+<div style="font-size: 1.5rem; font-weight: 700; color: {'#b91c1c' if pred_tier=='At-Risk' else '#15803d'};">{pred_tier}</div>
+</div>
+<div>
+<div style="font-size: 0.85rem; color: #64748b; font-weight: 600;">GRADE & GPA SCALE</div>
+<div style="font-size: 1.4rem; font-weight: 700; color: #334155;">{letter_grade} ({gpa:.1f})</div>
+</div>
+</div>
+
+<h4 style="color: #1e3c72; margin-top: 16px; margin-bottom: 8px;">3. Faculty Remarks & Prescriptive Action Plan</h4>
+<div style="background: #f8fafc; border-left: 4px solid #1e3c72; padding: 14px 18px; font-size: 0.95rem; margin-bottom: 30px;">
+{f"• <strong>URGENT REMEDIATION:</strong> Attendance ({att}%) is critically below the 75% examination eligibility requirement. Mandatory mentor counseling scheduled.<br>" if att < 75 else "• <strong>ATTENDANCE STANDING:</strong> Attendance complies with university examination guidelines.<br>"}
+{f"• <strong>STUDY TIME ADJUSTMENT:</strong> Recommend increasing self-study by at least 4 hours/week to bolster core fundamentals.<br>" if study_hrs < 12 else "• <strong>STUDY HABITS:</strong> Consistent study schedule observed.<br>"}
+• <strong>OVERALL PROJECTION:</strong> Student is projected to achieve <strong>{pred_score:.1f}%</strong> ({pred_tier} Category). Maintain focus on laboratory exercises and model test submissions.
+</div>
+
+<div style="display: flex; justify-content: space-between; margin-top: 40px; padding-top: 20px; border-top: 1px dashed #cbd5e1; font-size: 0.9rem;">
+<div style="text-align: center;">
+<div style="font-weight: 700;">Prof. Rajesh Gupta</div>
+<div style="color: #64748b;">Faculty Academic Mentor</div>
+</div>
+<div style="text-align: center;">
+<div style="font-weight: 700;">Dr. M. S. Venkatesh</div>
+<div style="color: #64748b;">Head of Department (BCA)</div>
+</div>
+<div style="text-align: center;">
+<div style="font-weight: 700;">Registrar (Evaluation)</div>
+<div style="color: #64748b;">Office of Academic Examination</div>
+</div>
+</div>
+</div>"""
+
+    if hasattr(st, "html"):
+        st.html(report_html)
+    else:
+        st.markdown(report_html, unsafe_allow_html=True)
     
     # Download HTML Button
     html_content = f"""
