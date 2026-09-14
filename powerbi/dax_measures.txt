@@ -1,0 +1,143 @@
+================================================================================
+STUDENT PERFORMANCE PREDICTION & ANALYTICS - POWER BI DAX MEASURES
+Student Performance Prediction System (BCA Academic Project)
+================================================================================
+
+Copy and paste these DAX measures into Power BI Desktop via:
+Modeling Tab -> "New Measure"
+
+--------------------------------------------------------------------------------
+1. CORE KPI MEASURES (For Scorecards & Single-Value Cards)
+--------------------------------------------------------------------------------
+
+-- Total Student Count
+Total Students = COUNTROWS('student_performance_powerbi')
+
+-- Total Passed Students
+Passed Students = 
+CALCULATE(
+    COUNTROWS('student_performance_powerbi'),
+    'student_performance_powerbi'[Passed] = "Yes"
+)
+
+-- Overall Pass Percentage (%)
+Pass Rate % = 
+DIVIDE(
+    [Passed Students],
+    [Total Students],
+    0
+) * 100
+
+-- Average Final Score
+Average Final Score = 
+ROUND(AVERAGE('student_performance_powerbi'[Final_Score]), 1)
+
+-- Average Attendance Rate (%)
+Average Attendance % = 
+ROUND(AVERAGE('student_performance_powerbi'[Attendance_Rate]), 1)
+
+-- Average Weekly Study Hours
+Average Study Hours = 
+ROUND(AVERAGE('student_performance_powerbi'[Study_Hours_Per_Week]), 1)
+
+-- Average Internal Assessment
+Average Internal Score = 
+ROUND(AVERAGE('student_performance_powerbi'[Internal_Assessment_Score]), 1)
+
+
+--------------------------------------------------------------------------------
+2. RISK & EARLY-WARNING METRICS
+--------------------------------------------------------------------------------
+
+-- High-Risk Students Count (At-Risk or Attendance < 60%)
+High Risk Students = 
+CALCULATE(
+    COUNTROWS('student_performance_powerbi'),
+    'student_performance_powerbi'[Risk_Level] = "High Risk"
+)
+
+-- High-Risk Rate (%)
+High Risk % = 
+DIVIDE(
+    [High Risk Students],
+    [Total Students],
+    0
+) * 100
+
+-- Critical Attendance Count (< 65% Attendance)
+Students with Low Attendance = 
+CALCULATE(
+    COUNTROWS('student_performance_powerbi'),
+    'student_performance_powerbi'[Attendance_Rate] < 65
+)
+
+-- Distinction Count (Final Score >= 80)
+Distinction Students = 
+CALCULATE(
+    COUNTROWS('student_performance_powerbi'),
+    'student_performance_powerbi'[Performance_Category] = "Distinction"
+)
+
+-- Distinction Rate (%)
+Distinction Rate % = 
+DIVIDE(
+    [Distinction Students],
+    [Total Students],
+    0
+) * 100
+
+
+--------------------------------------------------------------------------------
+3. COMPARATIVE & FACTOR-BASED MEASURES
+--------------------------------------------------------------------------------
+
+-- Average Score for Students with Tutoring
+Avg Score With Tutoring = 
+CALCULATE(
+    AVERAGE('student_performance_powerbi'[Final_Score]),
+    'student_performance_powerbi'[Tutoring_Classes] = "Yes"
+)
+
+-- Average Score for Students without Tutoring
+Avg Score Without Tutoring = 
+CALCULATE(
+    AVERAGE('student_performance_powerbi'[Final_Score]),
+    'student_performance_powerbi'[Tutoring_Classes] = "No"
+)
+
+-- Tutoring Score Lift (Difference in Marks)
+Tutoring Lift = 
+[Avg Score With Tutoring] - [Avg Score Without Tutoring]
+
+-- Optimal Sleep Pass Rate (Between 6.5 and 8.5 Hours)
+Pass Rate Optimal Sleep % = 
+VAR OptimalStudents = 
+    CALCULATE(
+        COUNTROWS('student_performance_powerbi'),
+        'student_performance_powerbi'[Sleep_Hours_Per_Day] >= 6.5,
+        'student_performance_powerbi'[Sleep_Hours_Per_Day] <= 8.5
+    )
+VAR OptimalPassed = 
+    CALCULATE(
+        COUNTROWS('student_performance_powerbi'),
+        'student_performance_powerbi'[Passed] = "Yes",
+        'student_performance_powerbi'[Sleep_Hours_Per_Day] >= 6.5,
+        'student_performance_powerbi'[Sleep_Hours_Per_Day] <= 8.5
+    )
+RETURN
+    DIVIDE(OptimalPassed, OptimalStudents, 0) * 100
+
+
+--------------------------------------------------------------------------------
+4. DYNAMIC INTERVENTION RECOMMENDATION (Used in Detail Table Visuals)
+--------------------------------------------------------------------------------
+
+Student Intervention Status = 
+SWITCH(
+    TRUE(),
+    SELECTEDVALUE('student_performance_powerbi'[Attendance_Rate]) < 65, "Urgent: Attendance Deficit Warning",
+    SELECTEDVALUE('student_performance_powerbi'[Internal_Assessment_Score]) < 25, "Academic Remedial Classes Needed",
+    SELECTEDVALUE('student_performance_powerbi'[Study_Hours_Per_Week]) < 8, "Study Habits Counseling Recommended",
+    SELECTEDVALUE('student_performance_powerbi'[Final_Score]) >= 80, "Distinction Candidate - Advanced Mentorship",
+    "On-Track: Good Academic Standing"
+)

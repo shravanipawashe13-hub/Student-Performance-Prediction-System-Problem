@@ -1,0 +1,54 @@
+{
+    "features": [
+        "Age",
+        "Gender",
+        "Parental_Education",
+        "Study_Hours_Per_Week",
+        "Attendance_Rate",
+        "Past_Exam_Score",
+        "Internal_Assessment_Score",
+        "Assignment_Completion_Rate",
+        "Tutoring_Classes",
+        "Internet_Access",
+        "Extracurricular_Activities",
+        "Sleep_Hours_Per_Day"
+    ],
+    "categorical_features": [
+        "Gender",
+        "Parental_Education",
+        "Tutoring_Classes",
+        "Internet_Access",
+        "Extracurricular_Activities"
+    ],
+    "target_classes": [
+        "At-Risk",
+        "Distinction",
+        "Merit",
+        "Pass"
+    ],
+    "classifier_metrics": {
+        "accuracy": 0.7417,
+        "precision": 0.7208,
+        "recall": 0.7417,
+        "f1_score": 0.7196
+    },
+    "regressor_metrics": {
+        "mae": 3.9806,
+        "rmse": 4.9748,
+        "r2_score": 0.7061
+    },
+    "feature_importances": {
+        "Age": 0.0,
+        "Gender": 0.0,
+        "Parental_Education": 0.0,
+        "Study_Hours_Per_Week": 0.0659,
+        "Attendance_Rate": 0.1263,
+        "Past_Exam_Score": 0.2232,
+        "Internal_Assessment_Score": 0.5283,
+        "Assignment_Completion_Rate": 0.0407,
+        "Tutoring_Classes": 0.0047,
+        "Internet_Access": 0.0072,
+        "Extracurricular_Activities": 0.0,
+        "Sleep_Hours_Per_Day": 0.0037
+    }
+}

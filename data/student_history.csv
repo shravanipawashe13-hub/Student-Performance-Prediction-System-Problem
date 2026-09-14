@@ -1,0 +1,15 @@
+Evaluation_ID,Evaluation_Date,Student_ID,Student_Name,Attendance_Rate,Study_Hours_Per_Week,Internal_Assessment_Score,Past_Exam_Score,Sleep_Hours_Per_Day,Predicted_Score,Performance_Category,Status
+EV-7283,2026-09-14,STU1305,Neha Singh,82.0,15.0,36.0,72.0,7.5,71.8,Merit,On Track
+EV-6606,2026-09-14,STU1901,Neha Singh,82.0,15.0,36.0,72.0,7.5,71.8,Merit,On Track
+EV-5792,2026-09-14,STU1206,Shravanin pawashe,78.0,14.0,34.0,68.0,7.0,68.4,Merit,On Track
+EV-5075,2026-09-14,STU1988,Neha Singh,82.0,15.0,36.0,72.0,7.5,71.8,Merit,On Track
+EV-4108,2026-09-14,STU1356,Neha Singh,82.0,15.0,36.0,72.0,7.5,71.8,Merit,On Track
+EV-3472,2026-09-14,STU9901,Riya Sen,82.0,15.0,36.0,72.0,7.5,71.8,Merit,On Track
+EV-2883,2026-09-14,STU1042STU1042,Aarav Test,82.0,15.0,36.0,72.0,7.5,71.8,Merit,On Track
+EV-2378,2026-09-14,STU1205,Shravanin pawashe,78.0,14.0,34.0,68.0,7.0,68.4,Merit,On Track
+EV-2133,2026-09-14,STU1227,Neha Singh,82.0,15.0,36.0,72.0,7.5,71.8,Merit,On Track
+EV-1005,2026-09-02,STU1192,Vikram Malhotra,82.0,15.0,36.0,71.0,7.5,72.5,Merit,On Track
+EV-1004,2026-08-28,STU1140,Ananya Iyer,74.0,12.0,31.0,62.0,7.0,63.8,Pass,Attendance Alert
+EV-1003,2026-08-20,STU1105,Rohan Verma,58.0,6.0,21.0,44.0,5.0,43.1,At-Risk,Critical Warning
+EV-1002,2026-08-15,STU1088,Priya Patel,94.0,24.0,47.0,89.0,8.0,91.2,Distinction,High Achiever
+EV-1001,2026-08-10,STU1042,Aarav Sharma,88.0,18.5,42.0,76.0,7.5,79.4,Merit,On Track

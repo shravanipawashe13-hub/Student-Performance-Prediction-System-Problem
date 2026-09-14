@@ -1,0 +1,20 @@
+Student_ID,Student_Name,Cycle_Type,Period,Attendance,Study_Hours,Internal_Score,Predicted_Score,Tier
+STU1042,Aarav Sharma,Monthly,Month 1 (Apr),80.0,14.0,36.0,72.0,Merit
+STU1042,Aarav Sharma,Monthly,Month 2 (May),82.0,16.0,38.0,74.5,Merit
+STU1042,Aarav Sharma,Monthly,Month 3 (Jun),85.0,17.5,40.0,77.0,Merit
+STU1042,Aarav Sharma,Monthly,Month 4 (Jul),88.0,18.5,42.0,79.4,Merit
+STU1042,Aarav Sharma,Quarterly,Q1 (Foundations),81.0,15.0,37.0,73.2,Merit
+STU1042,Aarav Sharma,Quarterly,Q2 (Mid-Term),87.0,18.0,41.5,78.5,Merit
+STU1105,Rohan Verma,Monthly,Month 1 (Apr),75.0,11.0,30.0,58.0,Pass
+STU1105,Rohan Verma,Monthly,Month 2 (May),68.0,9.0,26.0,51.5,Pass
+STU1105,Rohan Verma,Monthly,Month 3 (Jun),62.0,7.5,24.0,46.8,At-Risk
+STU1105,Rohan Verma,Monthly,Month 4 (Jul),58.0,6.0,21.0,43.1,At-Risk
+STU1105,Rohan Verma,Quarterly,Q1 (Foundations),72.0,10.0,28.5,55.0,Pass
+STU1105,Rohan Verma,Quarterly,Q2 (Mid-Term),60.0,6.8,22.5,45.0,At-Risk
+STU1088,Priya Patel,Monthly,Month 1 (Apr),90.0,20.0,44.0,86.0,Distinction
+STU1088,Priya Patel,Monthly,Month 2 (May),92.0,22.0,45.5,88.5,Distinction
+STU1088,Priya Patel,Monthly,Month 3 (Jun),93.0,23.0,46.0,89.8,Distinction
+STU1088,Priya Patel,Monthly,Month 4 (Jul),94.0,24.0,47.0,91.2,Distinction
+STU1088,Priya Patel,Quarterly,Q1 (Foundations),91.0,21.0,44.5,87.2,Distinction
+STU1088,Priya Patel,Quarterly,Q2 (Mid-Term),93.5,23.5,46.5,90.5,Distinction
+STU1042,Rohan Verma,Quarterly,Q3 (Pre-Univ),85.0,16.0,38.0,73.7,Merit

@@ -1,0 +1,44 @@
+{
+  "name": "StudentAnalyticsModernDark",
+  "dataColors": [
+    "#4361EE",
+    "#3A0CA3",
+    "#7209B7",
+    "#F72585",
+    "#4CC9F0",
+    "#06D6A0",
+    "#FFD166",
+    "#EF476F"
+  ],
+  "background": "#0F172A",
+  "foreground": "#F8FAFC",
+  "tableAccent": "#4361EE",
+  "visualStyles": {
+    "*": {
+      "*": {
+        "title": [
+          {
+            "show": true,
+            "fontColor": { "solid": { "color": "#F8FAFC" } },
+            "fontSize": 13,
+            "fontFamily": "Segoe UI Semibold"
+          }
+        ],
+        "background": [
+          {
+            "show": true,
+            "color": { "solid": { "color": "#1E293B" } },
+            "transparency": 0
+          }
+        ],
+        "border": [
+          {
+            "show": true,
+            "color": { "solid": { "color": "#334155" } },
+            "radius": 8
+          }
+        ]
+      }
+    }
+  }
+}
