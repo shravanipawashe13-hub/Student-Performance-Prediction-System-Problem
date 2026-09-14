@@ -726,7 +726,7 @@ if user_role == "student":
 tab_offset = 0
 if user_role == "admin":
     with tabs[0]:
-        st.subheader("👨‍🏫 Teacher & User Management (+1 Admin Exclusive Feature)")
+        st.subheader("👨‍🏫 Teacher & User Management ")
         st.markdown("As the **System Administrator**, you have the exclusive authority to **create, manage, and revoke Teacher and Faculty accounts**.")
         
         adm_col1, adm_col2 = st.columns([1.2, 1.8])
@@ -1142,8 +1142,11 @@ with tabs[tab_offset + 2]:
                         }
                         db.insert_student_record(sql_record)
                         auth.auto_create_student_account(new_s_id.strip(), new_s_name.strip(), "student123")
-                        st.success(f"✅ Record for {new_s_name} ({new_s_id}) successfully inserted! Student account auto-created (Username: '{new_s_id.strip().lower()}' / Password: 'student123'). Text fields cleared.")
+                        st.session_state["tab3_success"] = f"✅ Record for {new_s_name} ({new_s_id}) successfully inserted! Student account auto-created (Username: '{new_s_id.strip().lower()}' / Password: 'student123')."
                         st.rerun()
+
+    if "tab3_success" in st.session_state:
+        st.success(st.session_state.pop("tab3_success"))
 
     # Fetch from SQL DB
     hist_df = db.fetch_all_student_records()
