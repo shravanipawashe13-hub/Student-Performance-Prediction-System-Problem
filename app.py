@@ -380,7 +380,7 @@ with st.sidebar:
         st.metric(label="💾 SQL Database Engine", value=sql_engine_name)
         st.caption(f"Connected: `{sql_engine_loc}`")
         
-        with st.expander("⚙️ MySQL Database Setup (Optional)"):
+        with st.expander("⚙️ MySQL Database Setup (Optional )"):
             st.write("Connect to external MySQL / XAMPP Server:")
             m_host = st.text_input("Host", value="localhost")
             m_port = st.number_input("Port", value=3306, step=1)
