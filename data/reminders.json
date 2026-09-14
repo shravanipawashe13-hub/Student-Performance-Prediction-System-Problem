@@ -1,5 +1,29 @@
 [
     {
+        "id": "REM-AUTO-622",
+        "title": "Intervention Alert: Rohan Verma",
+        "student_id": "STU1105",
+        "student_name": "Rohan Verma",
+        "type": "Early-Warning Intervention",
+        "frequency": "Immediate",
+        "due_date": "2026-09-20",
+        "priority": "High",
+        "status": "Pending",
+        "message": "Student flagged with 58.0% attendance and predicted score 43.1%. Immediate faculty counseling required."
+    },
+    {
+        "id": "REM-AUTO-122",
+        "title": "Intervention Alert: Ananya Iyer",
+        "student_id": "STU1140",
+        "student_name": "Ananya Iyer",
+        "type": "Early-Warning Intervention",
+        "frequency": "Immediate",
+        "due_date": "2026-09-20",
+        "priority": "High",
+        "status": "Pending",
+        "message": "Student flagged with 74.0% attendance and predicted score 63.8%. Immediate faculty counseling required."
+    },
+    {
         "id": "REM-AUTO-733",
         "title": "Intervention Alert: Ananya Iyer",
         "student_id": "STU1140",
